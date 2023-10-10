@@ -1,0 +1,55 @@
+.cardWrapper {
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6rem;
+}
+.btnWrapper {
+    position: absolute;
+    top: 110px;
+    right: 32rem;
+   
+}
+
+.tabButton {
+    width: 60px;
+    height: 60px;
+    
+    background: #092c53;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.email{
+    height: 28px;
+    margin-top: 0.6rem;
+    align-items: center;
+}
+
+.tabButton:last-child {
+    margin-left: 20px;
+    
+}
+.active {
+    
+    background: #105F80;
+}
+
+.btnWrap {
+    margin-top: 40px;
+}
+
+.bottomParagraph {
+    color: #c4c5c5;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+.emailIcon{
+    font-size: 20px;
+}
+
+
