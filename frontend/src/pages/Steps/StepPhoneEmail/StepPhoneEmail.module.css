@@ -1,55 +1,54 @@
 .cardWrapper {
-    
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 6rem;
+    margin: 6rem auto; /* Centered and responsive margin */
+    max-width: 80%; /* Maximum width for the card */
+    padding: 20px;
+    text-align: center;
+    position: relative; /* Make the card position relative for positioning the buttons */
 }
+
 .btnWrapper {
     position: absolute;
-    top: 110px;
-    right: 32rem;
-   
+    top: -15%; /* Stick to the top of the card */
+    right: 28.5%; /* Stick to the right of the card */
 }
 
 .tabButton {
-    width: 60px;
-    height: 60px;
-    
+    width: 60px; /* Fixed button width */
+    height: 60px; /* Fixed button height */
     background: #092c53;
     border: none;
     outline: none;
-    border-radius: 10px;
+    border-radius: 20%; /* Makes it a circle */
     cursor: pointer;
 }
 
-.email{
-    height: 28px;
-    margin-top: 0.6rem;
+.email {
+    margin-top: 10px; /* Adjust the margin as needed */
     align-items: center;
 }
 
 .tabButton:last-child {
-    margin-left: 20px;
-    
+    margin-left: 1vw; /* Adjust the margin as needed */
 }
+
 .active {
-    
     background: #105F80;
 }
 
 .btnWrap {
-    margin-top: 40px;
+    margin-top: 4vw; /* Adjust the margin as needed */
 }
 
 .bottomParagraph {
     color: #c4c5c5;
     width: 70%;
     margin: 0 auto;
-    margin-top: 30px;
-}
-.emailIcon{
-    font-size: 20px;
+    margin-top: 3vw; /* Adjust the margin as needed */
 }
 
-
+.emailIcon {
+    font-size: 5vw;
+}
