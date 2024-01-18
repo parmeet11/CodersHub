@@ -68,13 +68,21 @@ class AuthController {
             activated: false,
         });
 
+        await tokenService.storeRefreshToken(refreshToken, user._id);
+
         res.cookie('refreshToken', refreshToken, {
             maxAge: 1000 * 60 * 60 * 24 * 30,
             httpOnly: true, //only server can read not js or to secure 
         });
+
+        res.cookie('accessToken', accessToken, {
+            maxAge: 1000 * 60 * 60 * 24 * 30,
+            httpOnly: true, //only server can read not js or to secure 
+        });
+
         const userDto = new UserDto(user);
         //console.log(userDto);
-        res.json({ accessToken, user: userDto});
+        res.json({user: userDto, auth:true});//we cannot read cookie on client so we sending flag
         //console.log(user);
 
     }    
