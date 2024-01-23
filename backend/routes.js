@@ -9,6 +9,6 @@ router.post('/api/verify-otp', authController.verifyOtp);
 router.post('/api/activate',authMiddleware, activateController.activate); //this route should be server and protected
                                                            //becoz user already logged in on client and they have refresh token and access token
                                                            //on this route we have to access only those who have access token and we have to create middle ware before that                     
-
+router.get('/api/refresh', authController.refresh);
 
 module.exports = router;

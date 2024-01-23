@@ -29,7 +29,7 @@ class ActivateController {
 
         try {
             const jimResp = await Jimp.read(Buffer.from(
-                pic.replace(/^data:image\/jpeg;base64,/, ''),
+                pic.replace(/^data:image\/(jpeg|jpeg|png);base64,/, ''),
                 'base64'
             ));
             jimResp

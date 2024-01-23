@@ -5,6 +5,7 @@ import styles from './StepProfilePic.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { setPic } from '../../../store/activateSlice';
 import {activate} from '../../../http';
+import { setAuth } from '../../../store/authSlice';
 
 const StepProfilePic = ({onNext}) => {
 
@@ -33,7 +34,10 @@ const StepProfilePic = ({onNext}) => {
 
       try{
         const {data} = await activate({name, pic});
-        console.log(data);
+        if(data.auth){
+            dispatch(setAuth(data));
+        }
+        //console.log(data);
 
       } catch(err) {
           console.log(err);
