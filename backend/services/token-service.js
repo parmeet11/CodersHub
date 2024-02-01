@@ -47,6 +47,10 @@ class TokenService {
         );
     }
 
+    async removeToken(refreshToken) {
+        return await refreshModel.deleteOne({ token: refreshToken });
+    }
+
 
 
 

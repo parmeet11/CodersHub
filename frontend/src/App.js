@@ -7,6 +7,8 @@ import Authenticate from './pages/authenticate/Authenticate';
 import Activate from './pages/activate/Activate';
 import Rooms from './pages/rooms/Rooms';
 import {useSelector} from 'react-redux';
+import { useLoading } from './hooks/useLoading';
+import Loader from './components/shared/Loader/Loader';
 
 //const isAuth = false;
 
@@ -16,7 +18,12 @@ import {useSelector} from 'react-redux';
 
 
 function App() {
-  return (
+
+  
+
+  const { loading } = useLoading();
+
+  return loading ? ( <Loader message="Loading...... Please Wait" /> ):(
     <BrowserRouter>
 
       <Navigation />

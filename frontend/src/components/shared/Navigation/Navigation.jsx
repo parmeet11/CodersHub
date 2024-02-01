@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { logout } from '../../../http';
 import styles from './Navigation.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAuth } from '../../../store/authSlice';
 
-const navigation = () => {
+const Navigation = () => {
   /*  javascript object */
   const inlineStyle = {
       gradient:{
@@ -23,6 +26,20 @@ const navigation = () => {
     fontWeight: '30px'
 };
 
+  const dispatch = useDispatch();
+  const { isAuth, user } = useSelector((state) => state.auth);
+  const logoutUser = async() => {
+    try {
+        const { data } = await logout();
+        dispatch(setAuth(data));
+    } catch (err) {
+        console.log(err);
+    }
+  }
+
+
+
+
   return (
     
     <nav className={`${styles.navbar} container`}>
@@ -32,9 +49,15 @@ const navigation = () => {
         <span style={logoText} >CodersHub</span>
         </div>
       </Link>
+      {isAuth && <button
+                        className={styles.logoutButton}
+                        onClick={logoutUser}
+                    >
+                        <img src="/images/logout.png" alt="logout" />
+                    </button>}
     </nav>
     
   )
 }
 
-export default navigation;
+export default Navigation;

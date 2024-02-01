@@ -19,7 +19,11 @@ export const authSlice = createSlice({
       
       const { user } = action.payload;
       state.user = user;
-      state.isAuth = true;
+      if (user === null) {
+        state.isAuth = false;
+    } else {
+        state.isAuth = true;
+    }
       
     },
 

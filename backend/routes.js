@@ -10,5 +10,6 @@ router.post('/api/activate',authMiddleware, activateController.activate); //this
                                                            //becoz user already logged in on client and they have refresh token and access token
                                                            //on this route we have to access only those who have access token and we have to create middle ware before that                     
 router.get('/api/refresh', authController.refresh);
+router.post('/api/logout', authMiddleware, authController.logout);
 
 module.exports = router;

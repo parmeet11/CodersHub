@@ -6,12 +6,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setPic } from '../../../store/activateSlice';
 import {activate} from '../../../http';
 import { setAuth } from '../../../store/authSlice';
+import Loader from '../../../components/shared/Loader/Loader';
 
 const StepProfilePic = ({onNext}) => {
 
    const dispatch = useDispatch();
     const { name, pic } = useSelector((state) => state.activate);
     const [image, setImage] = useState('/images/profile.png');
+    const [loading, setloading] = useState(false);
 
     const capture_image = (e) => {//image is in file format so we have to convert it in baase 64
                                       //string and pass that in src attribute 
@@ -32,20 +34,26 @@ const StepProfilePic = ({onNext}) => {
 
     const submit = async() =>{
 
+      if(!name || !pic) return;
+
+      setloading(true);
       try{
         const {data} = await activate({name, pic});
         if(data.auth){
             dispatch(setAuth(data));
         }
+
         //console.log(data);
 
       } catch(err) {
           console.log(err);
+      } finally {
+        setloading(false);
       }
 
     }
  
-
+  if (loading) return <Loader message="Loading... Please Wait!!"/>
 
 
   return (
