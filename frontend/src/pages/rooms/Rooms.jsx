@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Rooms.module.css';
 import RoomCard from '../../components/RoomCard/RoomCard';
+import AddRoomModal from '../../components/AddRoomModal/AddRoomModal';
+import { getAllRooms } from '../../http';
 
-const rooms = [
+/*const rooms = [
        {
            id: 1,
            topic: 'Which framework best for frontend ?',
@@ -71,9 +73,29 @@ const rooms = [
            ],
            totalPeople: 40,
        },
-   ];
+   ];*/
 
 const Rooms = () => {
+
+    const [showModal, setshowModal] = useState(false);
+    const [rooms, setRooms] = useState([]);
+
+    useEffect(() => {
+        const fetchRooms = async () => {
+            const { data } = await getAllRooms();
+            setRooms(data);
+        };
+        fetchRooms();
+    }, []);
+
+    const openModal = () => {
+        setshowModal(true);
+
+    }
+
+
+
+
   return (
     <>
       <div className="container">
@@ -87,7 +109,7 @@ const Rooms = () => {
                 </div>
                 <div className={styles.right}>
                         <button
-                            //onClick={openModal}
+                            onClick={openModal}
                             className={styles.startRoomButton}
                         >
                             <img
@@ -105,6 +127,7 @@ const Rooms = () => {
                     ))}
                 </div>    
       </div>
+      {showModal && <AddRoomModal onClose={() => setshowModal(false)}/> }
 
     </>
             

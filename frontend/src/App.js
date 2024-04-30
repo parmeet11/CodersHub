@@ -6,6 +6,7 @@ import Navigation from './components/shared/Navigation/Navigation';
 import Authenticate from './pages/authenticate/Authenticate';
 import Activate from './pages/activate/Activate';
 import Rooms from './pages/rooms/Rooms';
+import Room from './pages/Room/Room';
 import {useSelector} from 'react-redux';
 import { useLoading } from './hooks/useLoading';
 import Loader from './components/shared/Loader/Loader';
@@ -40,6 +41,10 @@ function App() {
 
           <Route path="/rooms" element={(<ProtectedRoute>
             <Rooms/>
+          </ProtectedRoute>)}/>
+
+          <Route path="/room/:id" element={(<ProtectedRoute>
+            <Room/>
           </ProtectedRoute>)}/>
 
 

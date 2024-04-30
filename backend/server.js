@@ -6,6 +6,16 @@ const DbConnect = require('./database');
 const router = require('./routes');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const server = require('http').createServer(app);
+const ACTIONS = require('./actions');
+
+
+const io = require('socket.io')(server, {
+    cors: {
+        origin: 'http://localhost:3000',//process.env.FRONT_URL,
+        methods: ['GET', 'POST'],
+    },
+});
 
 const corsOption = {
     credentials: true,
@@ -29,8 +39,33 @@ app.get('/',(req, res) => {
     res.send('hello');
 })
 
+const socketUserMapping = {
+
+}
+
+io.on('connection', (socket) => {
+    console.log('new connection', socket.id);
+
+    socket.on(ACTIONS.JOIN, ({roomId, user}) => {
+        socketUserMapping[socket.id] = user;
+
+    const clients = Array.from(io.sockets.adapter.rooms.get(roomId) || []);
+
+    clients.forEach((clientId) =>{
+        io.to(clientId).emit(ACTIONS.ADD_PEER, {});
+    });
+
+    socket.emit(ACTIONS.ADD_PEER, {});
+    socket.join(roomId);
 
 
+    //console.log(clients);
+    })
 
 
-app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+    
+
+})
+
+
+server.listen(PORT, () => console.log(`Running on port ${PORT}`));

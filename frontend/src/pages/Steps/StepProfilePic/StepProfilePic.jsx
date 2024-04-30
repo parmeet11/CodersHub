@@ -3,7 +3,7 @@ import Card from '../../../components/shared/Card/Card';
 import Button from '../../../components/shared/Button/Button';
 import styles from './StepProfilePic.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { setPic } from '../../../store/activateSlice';
+import { setAvatar } from '../../../store/activateSlice';
 import {activate} from '../../../http';
 import { setAuth } from '../../../store/authSlice';
 import Loader from '../../../components/shared/Loader/Loader';
@@ -11,7 +11,7 @@ import Loader from '../../../components/shared/Loader/Loader';
 const StepProfilePic = ({onNext}) => {
 
    const dispatch = useDispatch();
-    const { name, pic } = useSelector((state) => state.activate);
+    const { name, avatar } = useSelector((state) => state.activate);
     const [image, setImage] = useState('/images/profile.png');
     const [loading, setloading] = useState(false);
 
@@ -23,7 +23,7 @@ const StepProfilePic = ({onNext}) => {
       reader.onloadend = function(){   //anonymous function
         //console.log(reader.result);
         setImage(reader.result);
-        dispatch(setPic(reader.result));
+        dispatch(setAvatar(reader.result));
 
       }
 
@@ -34,11 +34,11 @@ const StepProfilePic = ({onNext}) => {
 
     const submit = async() =>{
 
-      if(!name || !pic) return;
+      if(!name || !avatar) return;
 
       setloading(true);
       try{
-        const {data} = await activate({name, pic});
+        const {data} = await activate({name, avatar});
         if(data.auth){
             dispatch(setAuth(data));
         }

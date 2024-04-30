@@ -7,9 +7,9 @@ class ActivateController {
 
     async activate(req, res) {
         // Activation logic
-        const { name, pic } = req.body;
-        //console.log(pic);
-        if (!name || !pic) {
+        const { name, avatar } = req.body;
+        //console.log(avatar);
+        if (!name || !avatar) {
             res.status(400).json({ message: 'All fields are required!' });
         }
         
@@ -29,7 +29,7 @@ class ActivateController {
 
         try {
             const jimResp = await Jimp.read(Buffer.from(
-                pic.replace(/^data:image\/(jpeg|jpeg|png);base64,/, ''),
+                avatar.replace(/^data:image\/(jpeg|jpeg|png);base64,/, ''),
                 'base64'
             ));
             jimResp
@@ -52,7 +52,7 @@ class ActivateController {
             }
             user.activated = true;
             user.name = name;
-            user.pic = `/storage/${imagePath}`;
+            user.avatar = `/storage/${imagePath}`;
             user.save();
             res.json({ user: new UserDto(user), auth: true });
         } catch (err) {
